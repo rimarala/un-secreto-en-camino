@@ -61,8 +61,6 @@
     .journey-step:nth-child(2) .journey-num { background: #ffeaf3; border-color: #eec2d9; color: #aa4e86; }
     .journey-step strong { display: block; font-size: .9rem; }
     .journey-step small { display: block; color: #7381a2; font-size: .8rem; }
-    .no-spoilers { border-left: 3px solid #d478a9; padding: 10px 13px; font-size: .82rem;
-      line-height: 1.45; color: #806184; background: #fff0f8; border-radius: 0 12px 12px 0; margin: 28px 0 0; }
     .jump { display: none; margin-top: 15px; font-weight: 750; color: #566fc2; font-size: .9rem; }
 
     .phone-col { display: flex; flex-direction: column; align-items: center; min-width: 0; }
@@ -229,6 +227,67 @@
       .options .button { font-size: .78rem; padding: 9px 5px; }
       .toy { width: 42px; height: 42px; font-size: 1.45rem; }
     }
+
+    /* Retos nuevos: ecuaciones, diferencias y memoria. */
+    .puzzle-note { display: block; font-size: .76rem; color: #717c9f; margin: 10px 0; }
+    .math-equations { display: grid; gap: 8px; margin: 13px 0; }
+    .math-equation { display: flex; align-items: center; justify-content: center;
+      gap: 12px; padding: 10px; font-weight: 850; font-size: 1.23rem;
+      background: #f0f5ff; border: 1px solid #d7e4f8; border-radius: 12px; }
+    .math-equation:nth-child(even) { background: #fff0f8; border-color: #f2d5e7; }
+    .math-equation.final-equation { border: 2px dashed #a78bc9;
+      background: linear-gradient(100deg,#fff1fa,#eff5ff); font-size: 1.45rem; }
+    .math-equation span { line-height: 1.25; }
+    .math-question { font-size: .82rem; color: #64749b; margin: 11px 0 8px; font-weight: 750; }
+    .digit-choices { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 7px; }
+    .digit-choices .button { font-size: 1.09rem; padding: 7px 0; min-height: 46px; }
+    .puzzle-action-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      margin: 9px 0; }
+    .puzzle-action-row .button { flex: 0 0 auto; }
+    .puzzle-feedback { font-size: .79rem; line-height: 1.45; color: #56689f; }
+    .difference-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      margin: 10px 0 9px; }
+    .difference-switch .button { font-size: .81rem; padding: 7px 5px; }
+    .difference-switch .active { background: #596fc1; color: #fff; border-color: #596fc1; }
+    .diff-caption { text-align: center; font-size: .75rem; font-weight: 750;
+      margin-bottom: 6px; color: #7c70a2; }
+    .difference-frame { border-radius: 14px; overflow: hidden;
+      border: 1px solid #d6dff4; background: #fff7fc; }
+    .difference-frame svg { display: block; width: 100%; height: auto; }
+    .difference-frame [data-diff] { cursor: pointer; fill: transparent; }
+    .difference-frame [data-diff]:focus-visible { stroke: #254d99; stroke-width: 4; }
+    .difference-dots { display: flex; flex-wrap: wrap; gap: 7px;
+      align-items: center; margin: 11px 0; font-size: .79rem; color: #6d7aa1; }
+    .difference-dot { display: inline-grid; place-items: center; width: 24px; height: 24px;
+      border: 1px dashed #b6c2e4; border-radius: 50%; font-size: .76rem; }
+    .difference-dot.found { color: #fff; background: #697bce; border-style: solid; }
+    .memory-suitcase { position: relative; border: 2px solid #c8a6d8;
+      border-radius: 17px; background: linear-gradient(145deg,#fff0f8,#f0f5ff);
+      margin: 22px 0 13px; padding: 18px 11px 12px; }
+    .memory-suitcase::before { content: ''; position: absolute; width: 63px; height: 20px;
+      left: calc(50% - 31px); top: -19px; border: 5px solid #b995ce;
+      border-bottom: none; border-radius: 15px 15px 0 0; }
+    .memory-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
+    .memory-tile { display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-height: 72px; padding: 9px 3px 6px;
+      background: #fffdfd; border: 1px solid #e9ddee; border-radius: 11px; }
+    .memory-tile:nth-child(2n) { background: #f4f7ff; }
+    .memory-tile .icon { font-size: 1.8rem; line-height: 1.25; }
+    .memory-tile .label { margin-top: 5px; font-size: .67rem; font-weight: 700;
+      text-align: center; line-height: 1.25; color: #71759f; }
+    .memory-tile.missing { border-style: dashed; background: #fff; }
+    .memory-tile.missing .icon { font-weight: 800; color: #d078ad; }
+    .memory-clock { padding: 8px 10px; border-radius: 10px; background: #eff3ff;
+      color: #506cbb; font-size: .85rem; font-weight: 800; text-align: center; }
+    .memory-choices { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+    .memory-choices .button { font-size: .78rem; padding: 9px 6px; min-height: 46px; }
+    @media (max-width: 380px) {
+      .math-equation { gap: 8px; font-size: 1.13rem; }
+      .math-equation.final-equation { font-size: 1.35rem; }
+      .memory-tile { min-height: 68px; }
+      .memory-tile .icon { font-size: 1.55rem; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation: none !important;
         transition-duration: .01ms !important; }
@@ -243,14 +302,13 @@
       <p class="hero-copy">Un mensaje especial ha llegado antes de tiempo. Pero el bebé no piensa ponérnoslo tan fácil… ¿Aceptas la misión?</p>
       <div class="ticket"><span class="ticket-icon" aria-hidden="true">🎟️</span><div>
         <strong>Invitación exclusiva</strong>
-        <small>3 pruebas &nbsp;·&nbsp; 5–10 minutos &nbsp;·&nbsp; 0 spoilers</small>
+        <small>6 pruebas &nbsp;&middot;&nbsp; 10-15 minutos &nbsp;&middot;&nbsp; 0 spoilers</small>
       </div></div>
       <div class="journey" aria-label="Cómo funciona el juego">
         <div class="journey-step"><span class="journey-num">01</span><div><strong>Haz tu apuesta</strong><small>¿Niño o niña?</small></div></div>
-        <div class="journey-step"><span class="journey-num">02</span><div><strong>Supera las pruebas</strong><small>Busca, ordena y descifra.</small></div></div>
+        <div class="journey-step"><span class="journey-num">02</span><div><strong>Supera las pruebas</strong><small>Seis retos para descubrir el secreto.</small></div></div>
         <div class="journey-step"><span class="journey-num">03</span><div><strong>Habla con los papás</strong><small>Solo ellos dirán el secreto.</small></div></div>
       </div>
-      <p class="no-spoilers">🔒 Este juego no conoce la respuesta. No pide nombres, teléfonos ni fotos; la revelación real la harán los papás por WhatsApp.</p>
       <a class="jump" href="#juego">Entrar al chat ↓</a>
     </section>
 
@@ -303,6 +361,8 @@
 
       function initialState() {
         return { stage: 0, vote: null, found: new Set(), order: [], orderSolved: false,
+          bottlesSolved: false, bottlesErrors: 0, diffFound: new Set(), diffView: 'A',
+          memoryPhase: 'ready', memoryRemaining: 8, memorySolved: false,
           codeErrors: 0, finalIndex: 0 };
       }
       function clearTimers() {
@@ -341,9 +401,10 @@
         }
       }
       function updateProgress() {
-        const values = [0, 20, 45, 72, 90, 100];
-        const names = ['Apuesta inicial', 'Prueba 1 de 3', 'Prueba 2 de 3',
-          'Prueba 3 de 3', 'Últimos mensajes', 'Misión completada'];
+        const values = [0, 12, 26, 40, 54, 68, 82, 92, 100];
+        const names = ['Apuesta inicial', 'Prueba 1 de 6', 'Prueba 2 de 6',
+          'Prueba 3 de 6', 'Prueba 4 de 6', 'Prueba 5 de 6',
+          'Prueba 6 de 6', 'Ultimos mensajes', 'Mision completada'];
         $('progress-fill').style.width = values[state.stage] + '%';
         $('progress-percent').textContent = values[state.stage] + '%';
         $('stage-label').textContent = names[state.stage];
@@ -379,9 +440,12 @@
         if (state.stage === 0) renderVote();
         if (state.stage === 1) renderFind();
         if (state.stage === 2) renderOrder();
-        if (state.stage === 3) renderCode();
-        if (state.stage === 4) renderFinalWaiting();
-        if (state.stage === 5) renderDone();
+        if (state.stage === 3) renderBottles();
+        if (state.stage === 4) renderDifferences();
+        if (state.stage === 5) renderMemory();
+        if (state.stage === 6) renderCode();
+        if (state.stage === 7) renderFinalWaiting();
+        if (state.stage === 8) renderDone();
       }
 
       function renderVote() {
@@ -517,8 +581,8 @@
         panel.append(row);
         const status = statusNode();
         panel.append(status);
-        const next = button('Ir a la última prueba →', 'primary block', () => {
-          addMessage(CONFIG.mama, '¡Ya casi está! Solo os falta abrir la caja fuerte.');
+        const next = button('Ir a la prueba 3 →', 'primary block', () => {
+          addMessage(CONFIG.mama, 'Lo siguiente tiene que ver con biberones... y un poquito de álgebra.');
           state.stage = 3;
           render();
         }, true);
@@ -544,13 +608,296 @@
         drawOrder();
       }
 
+
+      // ---------------------------------------------------------------
+      // PRUEBA 3: ecuaciones de biberones. Respuesta: estrella = 4.
+      // ---------------------------------------------------------------
+      function renderBottles() {
+        title('Prueba 3 \u00b7 Un poco de mates', 'El misterio de los biberones',
+          'El beb\u00e9 ha mezclado sus juguetes con las cuentas. \u00bfCu\u00e1nto vale la estrella?');
+        const rows = [
+          '\u{1F37C} + \u{1F37C} = 10',
+          '\u{1F37C} + \u{1F9F8} = 8',
+          '\u{1F9F8} + \u2B50 = 7',
+          '\u2B50 = ?'
+        ];
+        const board = element('div', 'math-equations');
+        rows.forEach((line, index) => {
+          board.append(element('div', 'math-equation' + (index === 3 ? ' final-equation' : ''), line));
+        });
+        panel.append(board);
+        panel.append(element('div', 'math-question', '\u00bfQu\u00e9 n\u00famero es la estrella?'));
+        const options = element('div', 'digit-choices');
+        const status = statusNode();
+        const buttons = [];
+        const next = button('Ir a la prueba 4 \u2192', 'primary block', () => {
+          addMessage(CONFIG.papa, '\u00a1Ahora vamos a comprobar vuestra vista! \u00bfPreparados para encontrar diferencias?');
+          state.stage = 4;
+          render();
+        }, !state.bottlesSolved);
+        for (let value = 0; value < 10; value++) {
+          const b = button(String(value), '', () => {
+            if (state.bottlesSolved) return;
+            if (value === 4) {
+              state.bottlesSolved = true;
+              status.textContent = '\u00a1Exacto! El biber\u00f3n vale 5, el osito 3 y la estrella 4. \u2705';
+              addMessage(CONFIG.bebe, '\u00a1Bien! Ya puedo contrataros para llevar las cuentas de mis biberones. \u{1F602}');
+              buttons.forEach(x => { x.disabled = true; });
+              b.classList.add('primary');
+              next.disabled = false;
+            } else {
+              state.bottlesErrors++;
+              status.textContent = state.bottlesErrors >= 2
+                ? 'Pista: si dos biberones suman 10, cada biber\u00f3n vale 5.'
+                : 'Mmm... revisa las tres operaciones y prueba otra vez.';
+            }
+          }, state.bottlesSolved);
+          options.append(b);
+          buttons.push(b);
+        }
+        panel.append(options);
+        panel.append(status);
+        next.style.marginTop = '9px';
+        panel.append(next);
+        if (state.bottlesSolved) status.textContent = '\u00a1Prueba superada!';
+      }
+
+      // ---------------------------------------------------------------
+      // PRUEBA 4: dos ilustraciones sin fotos externas.
+      // Se comparan en el mismo espacio, para que quepan en un movil.
+      // Diferencias: estante, ventana, lacito del oso y almohada.
+      // ---------------------------------------------------------------
+      const DIFF_IDS = ['shelf', 'window', 'bear', 'pillow'];
+      const DIFF_LABELS = {
+        shelf: 'la estanter\u00eda', window: 'la ventana', bear: 'el osito', pillow: 'la almohada'
+      };
+      const DIFF_HINTS = [
+        'Pista: empieza por la parte de arriba de la habitaci\u00f3n.',
+        'F\u00edjate en la estanter\u00eda, la ventana, el osito y la cuna.'
+      ];
+      function roomSvg(variant) {
+        const changed = variant === 'B';
+        const shelf = changed
+          ? '<g><path d="M76 43 h28 v17 h-28 z" rx="4" fill="#7db4e8"/><rect x="80" y="35" width="20" height="10" rx="5" fill="#5a79c3"/><path d="M76 48 h28" stroke="#fff" stroke-width="3"/></g>'
+          : '<g><circle cx="89" cy="48" r="13" fill="#f7ce68"/><path d="M89 30 v-6 M89 71 v-6 M71 48 h-6 M113 48 h-6" stroke="#c08cb6" stroke-width="4" stroke-linecap="round"/></g>';
+        const sky = changed
+          ? '<g fill="#fff"><circle cx="272" cy="62" r="14"/><circle cx="291" cy="58" r="18"/><circle cx="307" cy="65" r="13"/><rect x="271" y="62" width="46" height="14" rx="7"/></g>'
+          : '<g><circle cx="290" cy="63" r="16" fill="#f4c76c"/><g stroke="#f4c76c" stroke-width="3" stroke-linecap="round"><path d="M290 37v-7 M290 96v-7 M263 63h-7 M324 63h-7 M271 44l-5-5 M309 82l5 5 M309 44l5-5 M271 82l-5 5"/></g></g>';
+        const bow = changed
+          ? '<g><path d="M65 190l-13-10v20z M65 190l13-10v20z" fill="#e780b2" stroke="#bf619c" stroke-width="2"/><circle cx="65" cy="190" r="5" fill="#fff3fa"/></g>'
+          : '<g><path d="M65 190l-13-10v20z M65 190l13-10v20z" fill="#729bd4" stroke="#537ec0" stroke-width="2"/><circle cx="65" cy="190" r="5" fill="#fff3fa"/></g>';
+        const pillow = changed
+          ? '<path d="M243 153c-5-9-20-3-16 7 3 6 16 15 16 15s14-9 16-15c4-10-11-16-16-7z" fill="#dd7cab"/>'
+          : '<path d="M243 146l5 12 13 1-10 8 3 12-11-6-11 6 3-12-10-8 13-1z" fill="#7da2dc"/>';
+        const marks = DIFF_IDS.filter(id => state.diffFound.has(id)).map(id => {
+          const points = { shelf: [89,49], window: [292,64], bear: [65,190], pillow: [243,162] };
+          const [x, y] = points[id];
+          return '<g pointer-events="none"><circle cx="'+x+'" cy="'+y+'" r="24" fill="none" stroke="#3d66c2" stroke-width="5"/><circle cx="'+(x+17)+'" cy="'+(y-16)+'" r="11" fill="#3d66c2"/><text x="'+(x+17)+'" y="'+(y-12)+'" text-anchor="middle" fill="white" font-size="13" font-weight="800">&#10003;</text></g>';
+        }).join('');
+        const targets = changed ? [
+          ['shelf',40,23,90,65], ['window',253,28,70,65],
+          ['bear',30,146,85,76], ['pillow',215,139,77,53]
+        ].filter(([id]) => !state.diffFound.has(id)).map(([id,x,y,w,h]) =>
+          '<rect data-diff="'+id+'" role="button" tabindex="0" aria-label="Comprobar zona: '+DIFF_LABELS[id]+'" x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'"/>').join('') : '';
+        return '<svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Habitaci\u00f3n infantil, versi\u00f3n '+variant+'">'
+          +'<rect width="360" height="240" fill="#f3efff"/>'
+          +'<rect y="171" width="360" height="69" fill="#fce0ef"/>'
+          +'<path d="M0 171h360" stroke="#d2b6db" stroke-width="5"/>'
+          +'<ellipse cx="184" cy="223" rx="151" ry="15" fill="#e0c9ed"/>'
+          +'<rect x="229" y="22" width="110" height="94" rx="7" fill="#fff"/>'
+          +'<rect x="237" y="30" width="94" height="78" rx="4" fill="#c5e4fa"/>'
+          + sky
+          +'<path d="M285 30v78 M237 70h94" stroke="#fff" stroke-width="6"/>'
+          +'<rect x="23" y="86" width="132" height="10" rx="4" fill="#b78cbe"/>'
+          +'<rect x="33" y="96" width="7" height="19" rx="3" fill="#b78cbe"/>'
+          +'<rect x="135" y="96" width="7" height="19" rx="3" fill="#b78cbe"/>'
+          +'<rect x="42" y="61" width="21" height="24" rx="6" fill="#f4a8c9"/>'
+          +'<path d="M45 68h15" stroke="#fff" stroke-width="4"/>'
+          + shelf
+          +'<rect x="111" y="59" width="19" height="27" rx="3" fill="#809ed6"/>'
+          +'<path d="M114 65h13 M114 71h13" stroke="#fff" stroke-width="2"/>'
+          +'<rect x="178" y="140" width="171" height="70" rx="9" fill="#fff" stroke="#e8c3df" stroke-width="5"/>'
+          +'<rect x="186" y="145" width="155" height="27" rx="7" fill="#d9e8ff"/>'
+          +'<rect x="196" y="145" width="60" height="34" rx="9" fill="#fff9ff"/>'
+          + pillow
+          +'<path d="M195 179v29 M216 179v29 M237 179v29 M258 179v29 M279 179v29 M300 179v29 M321 179v29" stroke="#c6a9d8" stroke-width="5"/>'
+          +'<rect x="181" y="203" width="163" height="11" rx="4" fill="#d7b4d9"/>'
+          +'<g><circle cx="43" cy="159" r="17" fill="#d3a88e"/><circle cx="90" cy="159" r="17" fill="#d3a88e"/>'
+          +'<circle cx="66" cy="162" r="30" fill="#e8c2a6"/><ellipse cx="66" cy="206" rx="33" ry="27" fill="#e8c2a6"/>'
+          +'<circle cx="56" cy="158" r="3" fill="#6d5266"/><circle cx="76" cy="158" r="3" fill="#6d5266"/>'
+          +'<ellipse cx="66" cy="170" rx="9" ry="6" fill="#fff1e7"/><circle cx="66" cy="166" r="4" fill="#805c62"/>'
+          +'<circle cx="43" cy="222" r="12" fill="#d3a88e"/><circle cx="89" cy="222" r="12" fill="#d3a88e"/>'
+          + bow+'</g>'
+          +'<path d="M127 210a16 16 0 1 1 32 0" fill="#f2c76d" stroke="#e9a2a8" stroke-width="4"/>'
+          +'<path d="M128 210h30" stroke="#da97ae" stroke-width="4"/>'
+          + (changed ? marks : '')
+          + targets+'</svg>';
+      }
+      function renderDifferences() {
+        title('Prueba 4 \u00b7 Ojo de \u00e1guila', 'Encuentra 4 diferencias',
+          'Alterna entre las dos im\u00e1genes. Las diferencias se marcan toc\u00e1ndolas en la imagen 2.');
+        const tabs = element('div', 'difference-switch');
+        const original = button('Imagen 1 \u00b7 original', '', () => {
+          state.diffView = 'A'; redraw();
+        });
+        const altered = button('Imagen 2 \u00b7 comparar', '', () => {
+          state.diffView = 'B'; redraw();
+        });
+        tabs.append(original, altered);
+        panel.append(tabs);
+        const caption = element('div', 'diff-caption');
+        const frame = element('div', 'difference-frame');
+        const dots = element('div', 'difference-dots');
+        const info = statusNode();
+        const hint = button('\u{1F4A1} Necesito una pista', 'secondary small', () => {
+          info.textContent = DIFF_HINTS[state.diffFound.size === 0 ? 0 : 1];
+        });
+        const next = button('Ir a la prueba 5 \u2192', 'primary block', () => {
+          addMessage(CONFIG.mama, 'Vale, tienen buena vista... \u00bfpero y la memoria? \u{1F9E0}');
+          state.stage = 5;
+          render();
+        }, state.diffFound.size !== 4);
+        panel.append(caption, frame, dots, hint, info, next);
+        next.style.marginTop = '9px';
+        function foundDifference(id) {
+          if (state.diffView !== 'B' || state.diffFound.has(id)) return;
+          state.diffFound.add(id);
+          info.textContent = '\u00a1Encontrada! La diferencia est\u00e1 en ' + DIFF_LABELS[id] + '.';
+          if (state.diffFound.size === 4) {
+            info.textContent = '\u00a1Enhorabuena, las cuatro diferencias encontradas! \u2705';
+            next.disabled = false;
+            addMessage(CONFIG.bebe, '\u00a1Menudos detectives! Espero que encontr\u00e9is mi chupete igual de r\u00e1pido. \u{1F602}');
+          }
+          redraw();
+        }
+        function redraw() {
+          original.classList.toggle('active', state.diffView === 'A');
+          altered.classList.toggle('active', state.diffView === 'B');
+          original.setAttribute('aria-pressed', String(state.diffView === 'A'));
+          altered.setAttribute('aria-pressed', String(state.diffView === 'B'));
+          caption.textContent = state.diffView === 'A'
+            ? 'IMAGEN 1 \u00b7 Observa bien los detalles'
+            : 'IMAGEN 2 \u00b7 Toca lo que haya cambiado';
+          frame.innerHTML = roomSvg(state.diffView);
+          const svg = frame.querySelector('svg');
+          svg.querySelectorAll('[data-diff]').forEach(target => {
+            target.addEventListener('click', () => foundDifference(target.dataset.diff));
+            target.addEventListener('keydown', event => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault(); foundDifference(target.dataset.diff);
+              }
+            });
+          });
+          dots.replaceChildren();
+          dots.append(element('span', '', state.diffFound.size + '/4 encontradas'));
+          for (let i = 0; i < 4; i++) dots.append(element('span', 'difference-dot' +
+            (i < state.diffFound.size ? ' found' : ''), i < state.diffFound.size ? '\u2713' : '\u00b7'));
+        }
+        redraw();
+      }
+
+      // ---------------------------------------------------------------
+      // PRUEBA 5: memoria visual de seis objetos durante ocho segundos.
+      // ---------------------------------------------------------------
+      const MEMORY_ITEMS = [
+        ['bottle', '\u{1F37C}', 'Biber\u00f3n'],
+        ['bear', '\u{1F9F8}', 'Osito'],
+        ['socks', '\u{1F9E6}', 'Calcetines'],
+        ['body', '\u{1F476}', 'Body'],
+        ['rattle', '\u2B50', 'Sonajero'],
+        ['book', '\u{1F4D6}', 'Cuento']
+      ];
+      const MEMORY_MISSING = 'socks';
+      function renderMemory() {
+        title('Prueba 5 \u00b7 Memoria de elefante', '\u00bfQu\u00e9 falta en mi maleta?',
+          'Memoriza seis objetos durante 8 segundos. Despu\u00e9s desaparecer\u00e1 uno.');
+        const status = statusNode();
+        if (state.memoryPhase === 'ready') {
+          panel.append(element('p', 'puzzle-note', 'Cuando est\u00e9s preparado, abre la maleta. El reloj empezar\u00e1 a contar.'));
+          panel.append(button('\u{1F9F3} Abrir la maleta', 'primary block', startMemory));
+          return;
+        }
+        const suitcase = element('div', 'memory-suitcase');
+        const grid = element('div', 'memory-grid');
+        MEMORY_ITEMS.forEach(([id, icon, label]) => {
+          const missing = id === MEMORY_MISSING && state.memoryPhase !== 'memorize';
+          const tile = element('div', 'memory-tile' + (missing ? ' missing' : ''));
+          tile.append(element('span', 'icon', missing ? '?' : icon));
+          tile.append(element('span', 'label', missing ? '\u00bfQu\u00e9 falta?' : label));
+          grid.append(tile);
+        });
+        suitcase.append(grid);
+        panel.append(suitcase);
+        if (state.memoryPhase === 'memorize') {
+          const timer = element('div', 'memory-clock', 'Memoriza... ' + state.memoryRemaining + ' s');
+          timer.id = 'memory-clock';
+          panel.append(timer);
+          panel.append(element('p', 'puzzle-note', 'Observa bien. Despu\u00e9s tendr\u00e1s que decir qu\u00e9 objeto ha desaparecido.'));
+          return;
+        }
+        panel.append(element('div', 'math-question', '\u00bfQu\u00e9 objeto ha desaparecido?'));
+        const choices = element('div', 'memory-choices');
+        const answerList = [MEMORY_ITEMS[5], MEMORY_ITEMS[2], MEMORY_ITEMS[0], MEMORY_ITEMS[1]];
+        const choiceButtons = [];
+        const next = button('Ir a la \u00faltima prueba \u2192', 'primary block', () => {
+          addMessage(CONFIG.papa, 'Ya solo queda un paso: abrir la caja fuerte con el c\u00f3digo secreto.');
+          state.stage = 6;
+          render();
+        }, !state.memorySolved);
+        answerList.forEach(([id, icon, label]) => {
+          const choice = button(icon + ' ' + label, '', () => {
+            if (state.memorySolved) return;
+            if (id === MEMORY_MISSING) {
+              state.memorySolved = true;
+              state.memoryPhase = 'solved';
+              status.textContent = '\u00a1S\u00ed! Faltaban los calcetines. \u2705';
+              choice.classList.add('primary');
+              choiceButtons.forEach(x => { x.disabled = true; });
+              replay.disabled = true;
+              next.disabled = false;
+              addMessage(CONFIG.bebe, '\u00a1Exacto! Espero no perder tantos calcetines cuando nazca. \u{1F9E6}');
+            } else {
+              status.textContent = 'Ese objeto sigue en la maleta. \u00a1Mira bien y prueba otra vez!';
+            }
+          }, state.memorySolved);
+          choiceButtons.push(choice);
+          choices.append(choice);
+        });
+        panel.append(choices);
+        const replay = button('\u21ba Volver a memorizar 8 segundos', 'secondary small', startMemory, state.memorySolved);
+        const actions = element('div', 'puzzle-action-row');
+        actions.append(replay);
+        panel.append(actions, status, next);
+        next.style.marginTop = '9px';
+        if (state.memorySolved) status.textContent = '\u00a1Prueba superada!';
+      }
+      function startMemory() {
+        if (state.stage !== 5 || state.memorySolved) return;
+        state.memoryPhase = 'memorize';
+        state.memoryRemaining = 8;
+        render();
+        function tick() {
+          if (state.stage !== 5 || state.memoryPhase !== 'memorize') return;
+          state.memoryRemaining -= 1;
+          if (state.memoryRemaining <= 0) {
+            state.memoryPhase = 'answer';
+            render();
+          } else {
+            const label = $('memory-clock');
+            if (label) label.textContent = 'Memoriza... ' + state.memoryRemaining + ' s';
+            later(tick, 1000);
+          }
+        }
+        later(tick, 1000);
+      }
+
       function renderCode() {
         // La configuracion permite meses del 1 al 12; octubre-diciembre usan 4 cifras.
         const mes = Number.isInteger(CONFIG.mesNacimiento) &&
           CONFIG.mesNacimiento >= 1 && CONFIG.mesNacimiento <= 12 ? CONFIG.mesNacimiento : 9;
         const codigo = '35' + String(mes);
         const cifras = codigo.length;
-        title('Prueba 3 · La caja fuerte', 'Encuentra el código de ' + cifras + ' cifras',
+        title('Prueba 6 · La caja fuerte', 'Encuentra el código de ' + cifras + ' cifras',
           'Las dos primeras cifras ya las tienes. Para completar el código, responde: ¿en qué mes nacerá el bebé?');
         const clues = element('div', 'clue-grid');
         [['Objetos que encontraste', '3'], ['Mensajes ordenados', '5'], ['¿En qué mes nacerá?', '?']].forEach(([label, value]) => {
@@ -572,7 +919,7 @@
         const unlock = button('🔓 Abrir la caja', 'primary', () => {
           if (inp.value === codigo) {
             addSystem('🔓 Caja fuerte desbloqueada');
-            state.stage = 4;
+            state.stage = 7;
             state.finalIndex = 0;
             render();
             beginFinalChat();
@@ -612,12 +959,12 @@
         showNextFinal();
       }
       function showNextFinal() {
-        if (state.stage !== 4) return;
+        if (state.stage !== 7) return;
         if (state.finalIndex >= END_CHAT.length) { finishFinal(); return; }
         typing.classList.add('active');
         const index = state.finalIndex;
         later(() => {
-          if (state.stage !== 4 || state.finalIndex !== index) return;
+          if (state.stage !== 7 || state.finalIndex !== index) return;
           typing.classList.remove('active');
           const [speaker, line] = END_CHAT[index];
           addMessage(speakerOf(speaker), line);
@@ -626,7 +973,7 @@
         }, 650);
       }
       function finishFinal() {
-        if (state.stage !== 4) return;
+        if (state.stage !== 7) return;
         clearTimers();
         while (state.finalIndex < END_CHAT.length) {
           const [speaker, line] = END_CHAT[state.finalIndex];
@@ -634,7 +981,7 @@
           state.finalIndex += 1;
         }
         addSystem('🎉 ¡Misión completada! Falta la noticia de verdad…');
-        state.stage = 5;
+        state.stage = 8;
         render();
       }
       function renderDone() {
@@ -662,7 +1009,7 @@
         chatLog.replaceChildren();
         addSystem('🔒 Grupo secreto · conversación de mentira');
         addMessage(CONFIG.bebe, '¡Hola, familia! 👶 Sé un secreto que os morís por conocer…');
-        addMessage(CONFIG.papa, 'Superad tres pruebas y os lo contaremos nosotros. 🤫');
+        addMessage(CONFIG.papa, 'Superad seis pruebas y os lo contaremos nosotros. 🤫');
         render();
       }
 

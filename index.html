@@ -113,6 +113,17 @@
     .button.vote-boy { background: linear-gradient(140deg, #e8f4ff, #d9eaff); border-color: #9bc4f1; color: #265a99; }
     .button.vote-girl { background: linear-gradient(140deg, #fff0f7, #ffdcea); border-color: #edb3d0; color: #9a3d70; }
     .button.vote-boy:focus-visible, .button.vote-girl:focus-visible { outline-offset: 3px; }
+    .button.vote-boy.selected { border-color: #2860a8; box-shadow: 0 0 0 3px #a7d2ff88; }
+    .button.vote-girl.selected { border-color: #a63a80; box-shadow: 0 0 0 3px #f7b6d888; }
+    .vote-label { display:block; margin: 4px 0 7px; font-weight: 800; font-size: .83rem;
+      color: #435783; }
+    .vote-name { display:block; width:100%; min-height: 49px; border: 1px solid #bfcbea;
+      border-radius: 12px; padding: 10px 13px; color: #293657; background: #fcfdff;
+      font-size: 1rem; margin-bottom: 13px; }
+    .vote-name:focus { border-color: #617bc4; outline: 2px solid #d2dfff; }
+    .vote-privacy { font-size: .75rem; line-height: 1.48; color: #6c789b; margin: 10px 0 10px; }
+    .vote-submit { margin-top: 12px; }
+    .vote-submit.busy { opacity: .75; }
     .button.secondary { background: #fff; color: #5c70a0; border-color: #d6dff3; }
     .button:disabled { opacity: .45; cursor: not-allowed; }
     .button:not(:disabled):active { transform: scale(.98); }
@@ -328,7 +339,7 @@
         <div class="panel" id="game-panel" aria-label="Prueba actual">
           <div class="stage-label">Misión inicial</div>
           <h2>¿Cuál es tu apuesta?</h2>
-          <p class="prompt">Selecciona una opción para empezar el juego.</p>
+          <p class="prompt">Escribe un apodo y selecciona Niño o Niña.</p>
         </div>
         <div class="phone-footer">Una historia para jugar, no un chat real.</div>
       </div>
@@ -347,7 +358,10 @@
         bebe: 'Bebé',
         fraseFinal: 'MISIÓN CUMPLIDA',
         tituloChat: 'Bebé en camino',
-        mesNacimiento: 9 // Ejemplo: 9 = septiembre. Cambiar por el mes real (1 a 12).
+        // URL de la aplicación web de Google Apps Script, terminada en /exec.
+        // NO pegues aquí la URL de Google Sheets.
+        votosScriptUrl: 'https://script.google.com/macros/s/AKfycbyQtauDt3Wye4fmvyADmAE5DLXu-Beaq3EM80AodFChn829x4C445xr6ND_4AWH0ehM/exec',
+        mesNacimiento: 4 // Ejemplo: 9 = septiembre. Cambiar por el mes real (1 a 12).
       };
       // =====================================================================
 
@@ -360,7 +374,7 @@
       let state = initialState();
 
       function initialState() {
-        return { stage: 0, vote: null, found: new Set(), order: [], orderSolved: false,
+        return { stage: 0, vote: null, voterName: null, found: new Set(), order: [], orderSolved: false,
           bottlesSolved: false, bottlesErrors: 0, diffFound: new Set(), diffView: 'A',
           memoryPhase: 'ready', memoryRemaining: 8, memorySolved: false,
           codeErrors: 0, finalIndex: 0 };
@@ -448,21 +462,149 @@
         if (state.stage === 8) renderDone();
       }
 
+      // Apuestas: se envian mediante POST sin exponer nombres en la URL.
+      // El POST es "no-cors" debido a las restricciones de Apps Script;
+      // para confirmar la escritura se comprueba un recibo aleatorio via JSONP.
+      // La consulta JSONP solo devuelve un booleano, nunca nombres ni votos.
+      function appScriptReady() {
+        return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(CONFIG.votosScriptUrl.trim());
+      }
+      function newReceipt() {
+        const bytes = new Uint8Array(16);
+        if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+          window.crypto.getRandomValues(bytes);
+        } else {
+          for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256);
+        }
+        return Array.from(bytes, n => n.toString(16).padStart(2, '0')).join('');
+      }
+      function receiptStatus(receipt) {
+        return new Promise((resolve, reject) => {
+          const callback = '__babyVote_' + newReceipt().slice(0, 19);
+          const script = document.createElement('script');
+          let settled = false;
+          const timer = setTimeout(() => finish(new Error('Sin respuesta del comprobador')), 5000);
+          function finish(error, result) {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timer);
+            script.remove();
+            delete window[callback];
+            if (error) reject(error); else resolve(result);
+          }
+          window[callback] = (result) => finish(null, !!(result && result.saved));
+          script.onerror = () => finish(new Error('No se pudo conectar con Google'));
+          const url = new URL(CONFIG.votosScriptUrl);
+          url.searchParams.set('action', 'status');
+          url.searchParams.set('receipt', receipt);
+          url.searchParams.set('callback', callback);
+          url.searchParams.set('_', String(Date.now()));
+          script.src = url.toString();
+          document.head.appendChild(script);
+        });
+      }
+      function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+      async function saveVote(name, vote) {
+        const receipt = newReceipt();
+        const params = new URLSearchParams({ action: 'vote', name, vote, receipt, website: '' });
+        await fetch(CONFIG.votosScriptUrl, {
+          method: 'POST', mode: 'no-cors', cache: 'no-store', body: params
+        });
+        // doPost puede seguir trabajando cuando resuelve el fetch opaque.
+        // Repetir solo la comprobacion, NO volver a enviar el voto.
+        for (let attempt = 0; attempt < 6; attempt++) {
+          if (attempt > 0) await sleep(700 + 500 * attempt);
+          try {
+            if (await receiptStatus(receipt)) return true;
+          } catch (e) {
+            // Un error temporal de red no permite afirmar que se haya perdido el voto.
+          }
+        }
+        throw new Error('No hemos podido confirmar que la apuesta se haya guardado.');
+      }
+
       function renderVote() {
         title('Primero, un pronóstico', '¿Quién viene en camino?',
-          'Antes de jugar, haz tu apuesta. No se envía ni se guarda en ningún sitio.');
+          'Dinos tu nombre o apodo y apuesta: ¿niño o niña?');
+        const form = element('form', 'vote-form');
+        form.noValidate = true;
+        const label = element('label', 'vote-label', 'Tu nombre o apodo');
+        label.htmlFor = 'voter-name';
+        const nameInput = element('input', 'vote-name');
+        nameInput.id = 'voter-name';
+        nameInput.type = 'text';
+        nameInput.required = true;
+        nameInput.maxLength = 40;
+        nameInput.minLength = 2;
+        nameInput.autocomplete = 'nickname';
+        nameInput.placeholder = 'Por ejemplo: Ana o Tío Pepe';
         const options = element('div', 'options');
-        [['👦 Niño', 'niño', 'vote-boy'], ['👧 Niña', 'niña', 'vote-girl']].forEach(([label, value, variant]) => {
-          options.append(button(label, variant, () => {
-            state.vote = value;
-            addMessage('Tú', 'Mi apuesta: ' + value, true);
-            addMessage(CONFIG.bebe, 'Apuntado… aunque yo no voy a confirmar ni desmentir nada. 🤭');
+        let selectedVote = '';
+        const choiceButtons = [];
+        [['👦 Niño', 'niño', 'vote-boy'], ['👧 Niña', 'niña', 'vote-girl']].forEach(([text, value, variant]) => {
+          const choice = button(text, variant, () => {
+            selectedVote = value;
+            choiceButtons.forEach(b => {
+              const active = b.dataset.value === value;
+              b.classList.toggle('selected', active);
+              b.setAttribute('aria-pressed', String(active));
+            });
+          });
+          choice.dataset.value = value;
+          choice.setAttribute('aria-pressed', 'false');
+          choiceButtons.push(choice);
+          options.append(choice);
+        });
+        const notice = element('p', 'vote-privacy',
+          'Guardaremos tu nombre o apodo y tu apuesta en una hoja privada de Google para que los futuros papás vean quién acertó. No pedimos teléfono ni correo.');
+        const submit = element('button', 'button primary block vote-submit', 'Guardar mi apuesta y empezar →');
+        submit.type = 'submit';
+        const feedback = statusNode();
+        feedback.setAttribute('aria-live', 'polite');
+        form.append(label, nameInput, options, notice, submit, feedback);
+        panel.append(form);
+        if (!appScriptReady()) {
+          submit.disabled = true;
+          feedback.textContent = 'Los papás aún tienen que activar las votaciones (enlace de Google Apps Script).';
+        }
+        form.addEventListener('submit', async event => {
+          event.preventDefault();
+          if (!appScriptReady()) return;
+          const name = nameInput.value.trim().replace(/\s+/g, ' ');
+          if (name.length < 2 || name.length > 40) {
+            feedback.textContent = 'Escribe un nombre o apodo de 2 a 40 caracteres.';
+            nameInput.focus();
+            return;
+          }
+          if (!selectedVote) {
+            feedback.textContent = 'Selecciona Niño o Niña para continuar.';
+            return;
+          }
+          // Evitar varios envios mientras esta pendiente la respuesta.
+          submit.disabled = true;
+          choiceButtons.forEach(b => { b.disabled = true; });
+          nameInput.readOnly = true;
+          submit.textContent = 'Guardando tu apuesta…';
+          submit.classList.add('busy');
+          feedback.textContent = 'Conectando con la hoja privada de los papás…';
+          try {
+            await saveVote(name, selectedVote);
+            state.vote = selectedVote;
+            state.voterName = name;
+            addMessage('Tú', 'Soy ' + name + ' y mi apuesta es: ' + selectedVote + '. 🗳️', true);
+            addMessage(CONFIG.bebe, '¡Voto guardado! Ni confirmo ni desmiento nada. 🤭');
             addMessage(CONFIG.mama, '¡Primera misión! Hay tres cositas escondidas en una habitación.');
             state.stage = 1;
             render();
-          }));
+          } catch (error) {
+            feedback.textContent = 'No se ha podido confirmar el voto. Revisa la conexión y prueba otra vez. Si se guardó, se actualizará la apuesta de ese mismo nombre, sin duplicarla.';
+            submit.disabled = false;
+            choiceButtons.forEach(b => { b.disabled = false; });
+            nameInput.readOnly = false;
+            submit.textContent = 'Reintentar guardar apuesta →';
+            submit.classList.remove('busy');
+          }
         });
-        panel.append(options);
       }
 
       function renderFind() {

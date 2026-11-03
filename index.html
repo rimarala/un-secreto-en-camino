@@ -12,8 +12,8 @@
       --pine: #546ec2;
       --pine-deep: #354987;
       --pine-bright: #5874c3;
-      --paper: #fffcff;
-      --bg: #f9f8ff;
+      --paper: #ffffff;
+      --bg: #ffffff;
       --ink: #293657;
       --muted: #6b7596;
       --border: #e1e1f1;
@@ -27,10 +27,8 @@
     body {
       margin: 0; min-width: 0; color: var(--ink);
       font: 16px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 3% 12%, #ffe6f1 0 0, transparent 27%),
-        radial-gradient(circle at 98% 93%, #e8efff 0 0, transparent 29%),
-        var(--bg);
+      /* Fondo blanco neutro; azul y rosa quedan como acentos. */
+      background: var(--bg);
     }
     button, input { font: inherit; }
     button { cursor: pointer; }
@@ -42,23 +40,23 @@
     .hero { min-width: 0; }
     .eyebrow { display: inline-flex; gap: 8px; align-items: center; text-transform: uppercase;
       font-size: .76rem; letter-spacing: .14em; font-weight: 850; color: var(--pine-bright); }
-    .eyebrow .star { font-size: 1.45rem; color: #d878ad; line-height: 1; }
+    .eyebrow .star { font-size: 1.45rem; color: #6f84a5; line-height: 1; }
     h1 { font: 500 clamp(3rem, 5.3vw, 5.35rem)/1.06 Georgia, "Times New Roman", serif;
       letter-spacing: -.065em; margin: 22px 0 17px; }
-    h1 em { font-weight: 400; color: #cc639c; }
+    h1 em { font-weight: 400; color: #bf3645; }
     .hero-copy { font-size: 1.06rem; line-height: 1.7; max-width: 380px;
       color: #667496; margin: 0 0 22px; }
-    .ticket { display: inline-flex; align-items: center; gap: 13px; background: #fffbff;
-      border: 1px dashed #e5b8d4; border-radius: 16px; padding: 13px 17px; box-shadow: 0 4px 13px #6b3b8309; }
-    .ticket-icon { font-size: 1.7rem; }
+    .ticket { display: inline-flex; align-items: center; gap: 13px; background: #ffffff;
+      border: 1px solid #dce3ed; border-left: 4px solid #bf3645; border-radius: 14px; padding: 13px 17px; box-shadow: 0 3px 10px #2936570b; }
+    .ticket-icon { font-size: 1.7rem; filter: grayscale(1); opacity: .8; }
     .ticket strong { display: block; font-size: .86rem; }
-    .ticket small { display: block; color: #817e9b; font-size: .76rem; margin-top: 2px; }
+    .ticket small { display: block; color: #394761; font-size: .76rem; margin-top: 2px; }
     .journey { display: grid; gap: 14px; margin-top: 32px; padding-top: 24px; border-top: 1px solid #dddff0; }
     .journey-step { display: flex; align-items: flex-start; gap: 13px; }
     .journey-num { display: grid; place-items: center; width: 35px; height: 35px; flex: none;
       border-radius: 11px; color: var(--pine); font-weight: 800; font-size: .75rem;
       border: 1px solid #bfceef; background: #eaf1ff; }
-    .journey-step:nth-child(2) .journey-num { background: #ffeaf3; border-color: #eec2d9; color: #aa4e86; }
+    .journey-step:nth-child(2) .journey-num { background: #eaf1ff; border-color: #bfceef; color: var(--pine); }
     .journey-step strong { display: block; font-size: .9rem; }
     .journey-step small { display: block; color: #7381a2; font-size: .8rem; }
     .jump { display: none; margin-top: 15px; font-weight: 750; color: #566fc2; font-size: .9rem; }

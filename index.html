@@ -317,8 +317,8 @@
         <a href="./" lang="es" aria-current="page">🇪🇸 Español</a>
         <a href="./italiano.html" lang="it">🇮🇹 Italiano</a>
       </nav>
-      <div class="eyebrow"><span class="star">✦</span> Operación secreto</div>
-      <h1 id="page-title">Hay alguien<br>con un <em>secreto.</em></h1>
+      <div class="eyebrow"><span class="star">✦</span> Sorpresa a la vista</div>
+      <h1 id="page-title">Hay alguien<br>con una <em>sorpresa.</em></h1>
       <p class="hero-copy">Un mensaje especial ha llegado antes de tiempo. Pero el bebé no piensa ponérnoslo tan fácil… ¿Aceptas la misión?</p>
       <div class="ticket"><span class="ticket-icon" aria-hidden="true">🎟️</span><div>
         <strong>Invitación exclusiva</strong>
@@ -326,8 +326,8 @@
       </div></div>
       <div class="journey" aria-label="Cómo funciona el juego">
         <div class="journey-step"><span class="journey-num">01</span><div><strong>Haz tu apuesta</strong><small>¿Niño o niña?</small></div></div>
-        <div class="journey-step"><span class="journey-num">02</span><div><strong>Supera las pruebas</strong><small>Seis retos para descubrir el secreto.</small></div></div>
-        <div class="journey-step"><span class="journey-num">03</span><div><strong>Habla con los papás</strong><small>Solo ellos dirán el secreto.</small></div></div>
+        <div class="journey-step"><span class="journey-num">02</span><div><strong>Supera las pruebas</strong><small>Seis retos para descubrir la sorpresa.</small></div></div>
+        <div class="journey-step"><span class="journey-num">03</span><div><strong>Habla con los papás</strong><small>Solo ellos dirán la sorpresa.</small></div></div>
       </div>
       <a class="jump" href="#juego">Entrar al chat ↓</a>
     </section>
@@ -993,7 +993,7 @@
         const answerList = [MEMORY_ITEMS[5], MEMORY_ITEMS[2], MEMORY_ITEMS[0], MEMORY_ITEMS[1]];
         const choiceButtons = [];
         const next = button('Ir a la \u00faltima prueba \u2192', 'primary block', () => {
-          addMessage(CONFIG.papa, 'Ya solo queda un paso: abrir la caja fuerte con el c\u00f3digo secreto.');
+          addMessage(CONFIG.papa, 'Ya solo queda un paso: abrir la caja fuerte con la c\u00f3digo sorpresa.');
           state.stage = 6;
           render();
         }, !state.memorySolved);
@@ -1096,7 +1096,7 @@
       const END_CHAT = [
         ['mama', '¡Lo habéis conseguido! Ya podemos contarles la noticia. 😍'],
         ['papa', 'Uy… eso significa que nos toca hablar a nosotros.'],
-        ['bebe', '¡ALTO! ¿Quién ha dicho que una página web puede contar MI secreto? 😤'],
+        ['bebe', '¡ALTO! ¿Quién ha dicho que una página web puede contar MI sorpresa? 😤'],
         ['papa', 'A ver… ¿entonces quién lo cuenta?'],
         ['bebe', '¡Mis papás, claro! Ellos tienen que dar la noticia. ❤️'],
         ['bebe', 'Familia: escribid la contraseña en vuestro grupo de WhatsApp. ¡Mis papás os esperan allí! 🎉']
@@ -1161,7 +1161,7 @@
         state = initialState();
         chatLog.replaceChildren();
         addSystem('🔒 Grupo secreto · conversación de mentira');
-        addMessage(CONFIG.bebe, '¡Hola, familia! 👶 Sé un secreto que os morís por conocer…');
+        addMessage(CONFIG.bebe, '¡Hola, familia! 👶 Tengo una sorpresa que os morís por conocer…');
         addMessage(CONFIG.papa, 'Superad seis pruebas y os lo contaremos nosotros. 🤫');
         render();
       }

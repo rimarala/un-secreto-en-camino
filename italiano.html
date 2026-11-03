@@ -317,8 +317,8 @@
         <a href="./" lang="es">🇪🇸 Español</a>
         <a href="./" lang="it" aria-current="page">🇮🇹 Italiano</a>
       </nav>
-      <div class="eyebrow"><span class="star">✦</span> Operazione segreto</div>
-      <h1 id="page-title">Qualcuno ha<br>un <em>segreto.</em></h1>
+      <div class="eyebrow"><span class="star">✦</span> Operazione sorpresa</div>
+      <h1 id="page-title">Qualcuno ha<br>una <em>sorpresa.</em></h1>
       <p class="hero-copy">Un messaggio speciale è arrivato in anticipo. Ma il bebè non vuole renderci le cose facili… Accetti la missione?</p>
       <div class="ticket"><span class="ticket-icon" aria-hidden="true">🎟️</span><div>
         <strong>Invito esclusivo</strong>
@@ -326,8 +326,8 @@
       </div></div>
       <div class="journey" aria-label="Come funziona il gioco">
         <div class="journey-step"><span class="journey-num">01</span><div><strong>Fai la tua previsione</strong><small>Maschio o femmina?</small></div></div>
-        <div class="journey-step"><span class="journey-num">02</span><div><strong>Supera le prove</strong><small>Sei sfide per arrivare al segreto.</small></div></div>
-        <div class="journey-step"><span class="journey-num">03</span><div><strong>Parla con i futuri genitori</strong><small>Solo loro sveleranno il segreto.</small></div></div>
+        <div class="journey-step"><span class="journey-num">02</span><div><strong>Supera le prove</strong><small>Sei sfide per arrivare alla sorpresa.</small></div></div>
+        <div class="journey-step"><span class="journey-num">03</span><div><strong>Parla con i futuri genitori</strong><small>Solo loro sveleranno la sorpresa.</small></div></div>
       </div>
       <a class="jump" href="#juego">Entra nella chat ↓</a>
     </section>
@@ -342,7 +342,7 @@
         <div class="progress"><div class="progress-head"><span id="stage-label">Prepariamo la missione</span><span id="progress-percent">0%</span></div>
           <div class="track" aria-label="Avanzamento del gioco"><div id="progress-fill"></div></div></div>
         <div class="chat-log" id="chat-log" role="log" aria-label="Conversazione immaginaria del gioco" aria-live="polite">
-          <div class="system-msg">🔒 Gruppo segreto · chat immaginaria</div>
+          <div class="system-msg">🔒 Gruppo segreto</div>
         </div>
         <div class="typing" id="typing-indicator" aria-hidden="true">● ● ●</div>
         <div class="panel" id="game-panel" aria-label="Prova in corso">
@@ -1096,7 +1096,7 @@
       const END_CHAT = [
         ['mama', 'Ce l’avete fatta! Ora possiamo dare la notizia. 😍'],
         ['papa', 'Oh… questo significa che ora tocca a noi parlare.'],
-        ['bebe', 'FERMI! Chi ha detto che un sito web può svelare il MIO segreto? 😤'],
+        ['bebe', 'FERMI! Chi ha detto che un sito web può svelare la MIA sorpresa? 😤'],
         ['papa', 'Aspetta… e allora chi lo racconta?'],
         ['bebe', 'I miei genitori, ovviamente! Devono essere loro a dare la notizia. ❤️'],
         ['bebe', 'Famiglia: scrivete la parola segreta nel vostro gruppo WhatsApp. I miei genitori vi aspettano lì! 🎉']
@@ -1160,8 +1160,8 @@
         clearTimers();
         state = initialState();
         chatLog.replaceChildren();
-        addSystem('🔒 Gruppo segreto · chat immaginaria');
-        addMessage(CONFIG.bebe, 'Ciao, famiglia! 👶 Conosco un segreto che non vedete l’ora di scoprire…');
+        addSystem('🔒 Gruppo segreto');
+        addMessage(CONFIG.bebe, 'Ciao, famiglia! 👶 Conosco una sorpresa che non vedete l’ora di scoprire…');
         addMessage(CONFIG.papa, 'Superate sei prove e poi ve lo diremo noi. 🤫');
         render();
       }

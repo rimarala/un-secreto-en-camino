@@ -342,7 +342,7 @@
         <div class="progress"><div class="progress-head"><span id="stage-label">Preparando la misión</span><span id="progress-percent">0%</span></div>
           <div class="track" aria-label="Progreso del juego"><div id="progress-fill"></div></div></div>
         <div class="chat-log" id="chat-log" role="log" aria-label="Conversación ficticia del juego" aria-live="polite">
-          <div class="system-msg">🔒 Grupo secreto · conversación de mentira</div>
+          <div class="system-msg">🔒 Grupo secreto</div>
         </div>
         <div class="typing" id="typing-indicator" aria-hidden="true">● ● ●</div>
         <div class="panel" id="game-panel" aria-label="Prueba actual">
@@ -1160,7 +1160,7 @@
         clearTimers();
         state = initialState();
         chatLog.replaceChildren();
-        addSystem('🔒 Grupo secreto · conversación de mentira');
+        addSystem('🔒 Grupo secreto');
         addMessage(CONFIG.bebe, '¡Hola, familia! 👶 Tengo una sorpresa que os morís por conocer…');
         addMessage(CONFIG.papa, 'Superad seis pruebas y os lo contaremos nosotros. 🤫');
         render();
